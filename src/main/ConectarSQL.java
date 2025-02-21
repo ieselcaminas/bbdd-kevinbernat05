@@ -1,3 +1,4 @@
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,16 +32,25 @@ public class ConectarSQL {
         }
         stmt.close();
     }
-    public static void insertUser(){
-        Statement stmt = null;
-        String sql = "INSERT INTO usuarios VALUES(nombre,apellidos) VALUES ('Noelia', 'Alvarez')";
+    public static void insertUser() throws SQLException {
+        Statement st = connection.createStatement();
+        st.executeUpdate("INSERT INTO usuarios (nombre, apellidos) VALUES ('Janet', 'Espinosa')");
+    }
+    public static void insertUserPreparedStatement() throws SQLException {
+        PreparedStatement st = null;
+        String sql = "INSERT INTO usuarios (nombre, apellidos) VALUES (?, ?)";
+        st = connection.prepareStatement(sql);
+        st.setString(1, "Juan");
+        st.setString(2, "Martínez");
+        st.executeUpdate();
+    }
+    public static void deleteUserPreparedStatement() throws SQLException {
+        PreparedStatement st = null;
+        //String sql = "INSERT INTO usuarios (nombre, apellidos) VALUES (?, ?)";
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        st = connection.prepareStatement(sql);
+        st.setInt(1, 5);
+        st.executeUpdate();
 
-        try {
-            stmt = connection.createStatement();
-            st
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
