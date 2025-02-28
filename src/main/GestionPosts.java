@@ -38,7 +38,7 @@ public class GestionPosts {
         System.out.println("---------------------------------");
         while (rs.next()) {
             printPost(rs);
-            printComments(rs.getInt(1));
+            GestionComentarios.printComments(rs.getInt(1));
         }
         System.out.println("---------------------------------");
     }
@@ -65,22 +65,7 @@ public class GestionPosts {
         pst.setInt(4, Main.id_usuario);
         pst.executeUpdate();
     }
-    public static void printComments(int idPost) throws SQLException {
-        Connection con = Main.connection;
 
-        PreparedStatement st = con.prepareStatement("SELECT c.id, c.texto, c.fecha, u.nombre" +
-                " FROM comentarios as c " +
-                " INNER JOIN usuarios as u O N c.id_usuario = u.id " +
-                " INNER JOIN posts as p ON c.id_post = p.id" +
-                " WHERE p.id = ?");
-
-        st.setInt(1, idPost);
-        ResultSet rs = st.executeQuery();
-        while (rs.next()) {
-            System.out.println("\t\t\t" + rs.getString(2) + " - " +
-                    rs.getDate(3 ) + " - " + rs.getString(4));
-        }
-    }
     public static void printPost(ResultSet rs) throws SQLException {
         System.out.println(rs.getInt(1) + " " +
                 rs.getString(2) + " likes:" +
