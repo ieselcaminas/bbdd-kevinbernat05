@@ -10,12 +10,14 @@ public class GestionUsuarios {
         int opcion = 0;
         String usuario;
         while (opcion != -1){
-
+            System.out.println(AnsiColor.GREEN.getCode());
             System.out.print(" 1 - Login | ");
             System.out.print(" 2 - Nuevo usuario |");
             System.out.print(" 3 - Borrar usuario | ");
             System.out.print(" 4 - Listar usuarios | ");
+            System.out.println(AnsiColor.RED.getCode());
             System.out.print("-1 - Salir");
+            System.out.println(AnsiColor.RESET.getCode());
 
             System.out.println();
 
